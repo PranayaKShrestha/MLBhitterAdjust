@@ -11,14 +11,14 @@ The goal of this project is to examine how long it takes for rookie hitters to a
 
 Using the mlb_stats() function from the baseballr package, I pulled seasonal hitting stats for all MLB rookies from 2000 to 2022. For each player, I used the mlb_people() function to retrieve their MLB debut year and last active season, and filtered out pitchers and any players with incomplete or invalid records.
 
-To access game-level data, I joined the player dataset with a Fangraphs ID file (fangraphsplayerid.csv). This provided a unique Fangraphs player ID for each hitter, which was necessary to query their game logs. One limitation was that the sample rate was only 34% meaning I was only able to find the Fangraphs IDs of 34% of the 1956 hitters who debuted from 2000-2022. 
+To access game-level data, I joined the player dataset with a Fangraphs ID file (fangraphsplayerid.csv). This provided a unique Fangraphs player ID for each hitter, which was necessary to query their game logs. One limitation of the dataset is the Fangraphs ID match rate. Of the 1,956 rookie hitters who debuted between 2000 and 2022, only 34% could be successfully matched to a valid Fangraphs player ID. This reduced the effective sample size for game-level analysis and may introduce selection bias if unmatched players differ systematically from those included.
 
 For each player’s career game log, I computed rolling 15-game averages and totals for key statistics like:
 
-Plate discipline: K%, BB%, BB/K, O-Swing%, Z-Swing%, Contact%, etc.
+**Plate discipline:** K%, BB%, BB/K, O-Swing%, Z-Swing%, Contact%, etc.
 
-Batting performance: OBP, SLG, AVG
+**Batting performance:** OBP, SLG, AVG
 
-Pitch tracking: First-pitch strike rate, zone %, swinging strike %
+**Pitch tracking:** First-pitch strike rate, zone %, swinging strike %
 
 To do this, I used rollapply() from the zoo package, which allowed for a right-aligned rolling window on cumulative and average stats.
