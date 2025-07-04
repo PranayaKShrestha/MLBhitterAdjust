@@ -49,8 +49,16 @@ The segmented() function in R estimates breakpoints in a dataset by fitting piec
 ![image](https://github.com/user-attachments/assets/d84ec02e-e1db-4ab3-93d4-af29f3f3e256)
 
 
+Once again, there does not seem to be an underlying trend or a clear inflection point on AVG%, OBP%, or SLG%. Each statistic exhibits a steady increase with OBP% and AVG% having a similar slope (2.924e-05 and 1.953e-05, respectively), which makes sense since OBP% and AVG% are highly correlated. SLG% has a steeper positive slope, which is interesting.
+
+**O-Swing, Z-Swing and Swing Trends**
+
+![image](https://github.com/user-attachments/assets/6c3f551f-025b-48f7-a145-8affa352af93)
+
+![image](https://github.com/user-attachments/assets/68330584-2005-427e-b5cc-14fed29c040a)
 
 
+![image](https://github.com/user-attachments/assets/af1de697-a1cf-4021-9461-68addc4dfa00)
 
 
 
