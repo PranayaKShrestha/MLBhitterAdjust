@@ -25,9 +25,34 @@ To do this, I used rollapply() from the zoo package, which allowed for a right-a
 
 *One limitation of the analysis is that raw pitch-by-pitch data needed to manually calculate plate discipline metrics such as O-Swing%, Z-Swing%, Contact%, and others, was not available, so I relied on averaging the pre-calculated rate statistics provided in the Fangraphs game logs.
 
-To investigate potential early-career adjustments by rookie hitters, I first examined the distribution of game-level observations using a histogram with an overlaid density curve. The resulting distribution is right-skewed, indicating that the majority of observations are concentrated in the earlier stages of player careers. Using the quantile() function, I determined that the 50th percentile corresponds to game 373. To focus the analysis on the initial adjustment period, I restricted the dataset to observations occurring at or before a player’s 373rd career game. This filtering approach helps isolate trends that are more likely to reflect early developmental changes rather than long-term performance patterns.
+To investigate potential early-career adjustments by rookie hitters, I first examined the distribution of game-level observations using a histogram with an overlaid density curve. The resulting distribution is right-skewed, indicating that the majority of observations are concentrated in the earlier stages of player careers. Using the quantile() function, I determined that the 50th percentile corresponds to game 373. To focus the analysis on the initial adjustment period, I restricted the dataset to observations occurring at or before a player’s 373rd career game. This filtering approach helps isolate trends that are more likely to reflect early developmental changes rather than long-term performance patterns. 
 
 ![image](https://github.com/user-attachments/assets/ce77f998-607a-4c4c-bfe7-23480fc76b14)
+
+Furthermore, to reduce noise and randomness, I grouped each game number and averaged each statistic for that set of game numbers.
+
+# Analysis
+
+To identify when rookie hitters begin to adjust to major league pitching, I used segmented regression. This method is well-suited for detecting structural changes or breakpoints in a time series. These breakpoints provide a way to estimate when a hitter begins to "adjust" or improve in a measurable way.
+
+**K% and BB% Trends**
+
+![image](https://github.com/user-attachments/assets/8c8a91eb-8546-4d32-87f4-b5622bc144b1)
+
+The segmented() function in R estimates breakpoints in a dataset by fitting piecewise linear regressions. However, it will return a breakpoint even if the underlying trend does not exhibit a clear structural change. In the case of the K% and BB% trends, visual inspection suggests that neither metric displays a pronounced inflection point. Instead, K% shows a strong negative linear trend, while BB% exhibits a relatively flat or modest positive slope. This divergence implies that although hitters tend to strike out less as their careers progress, this improvement is not necessarily accompanied by a corresponding increase in walk rate. Hitters may be making more contact and putting the ball in play earlier in counts.
+
+
+**AVG, OBP and SLG Trends**
+
+![image](https://github.com/user-attachments/assets/7b0dcaf0-571c-4051-a668-0c62b5770189)
+![image](https://github.com/user-attachments/assets/6aa4d338-e0d4-4eb6-8334-d038fbe0b38a)
+![image](https://github.com/user-attachments/assets/d84ec02e-e1db-4ab3-93d4-af29f3f3e256)
+
+
+
+
+
+
 
 
 
