@@ -21,4 +21,13 @@ For each player’s career game log, I computed rolling 15-game averages and tot
 
 **Pitch tracking:** First-pitch strike rate, zone %, swinging strike %
 
-To do this, I used rollapply() from the zoo package, which allowed for a right-aligned rolling window on cumulative and average stats.
+To do this, I used rollapply() from the zoo package, which allowed for a right-aligned rolling window on cumulative and average stats. 
+
+*One limitation of the analysis is that raw pitch-by-pitch data needed to manually calculate plate discipline metrics such as O-Swing%, Z-Swing%, Contact%, and others, was not available, so I relied on averaging the pre-calculated rate statistics provided in the Fangraphs game logs.
+
+To investigate potential early-career adjustments by rookie hitters, I first examined the distribution of game-level observations using a histogram with an overlaid density curve. The resulting distribution is right-skewed, indicating that the majority of observations are concentrated in the earlier stages of player careers. Using the quantile() function, I determined that the 50th percentile corresponds to game 373. To focus the analysis on the initial adjustment period, I restricted the dataset to observations occurring at or before a player’s 373rd career game. This filtering approach helps isolate trends that are more likely to reflect early developmental changes rather than long-term performance patterns.
+
+![image](https://github.com/user-attachments/assets/ce77f998-607a-4c4c-bfe7-23480fc76b14)
+
+
+
