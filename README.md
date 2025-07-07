@@ -11,7 +11,7 @@ The goal of this project is to examine how long it takes for rookie hitters to a
 
 Using the mlb_stats() function from the baseballr package, I pulled seasonal hitting stats for all MLB rookies from 2000 to 2022. For each player, I used the mlb_people() function to retrieve their MLB debut year and last active season, and filtered out pitchers and any players with incomplete or invalid records.
 
-To access game-level data, I joined the player dataset with a Fangraphs ID file (fangraphsplayerid.csv). This provided a unique Fangraphs player ID for each hitter, which was necessary to query their game logs. One limitation of the dataset is the Fangraphs ID match rate. Of the 1,956 rookie hitters who debuted between 2000 and 2022, only 34% could be successfully matched to a valid Fangraphs player ID. This reduced the effective sample size for game-level analysis and may introduce selection bias if unmatched players differ systematically from those included.
+To access game-level data, I joined the player dataset with a Fangraphs ID file (fangraphsplayerid.csv). This provided a unique Fangraphs player ID for each hitter, which was necessary to query their game logs. 
 
 For each player’s career game log, I computed rolling 15-game averages and totals for key statistics like:
 
@@ -23,7 +23,9 @@ For each player’s career game log, I computed rolling 15-game averages and tot
 
 To do this, I used rollapply() from the zoo package, which allowed for a right-aligned rolling window on cumulative and average stats. 
 
-*One limitation of the analysis is that raw pitch-by-pitch data needed to manually calculate plate discipline metrics such as O-Swing%, Z-Swing%, Contact%, and others, was not available, so I relied on averaging the pre-calculated rate statistics provided in the Fangraphs game logs.
+There were a few important limitations to this study. First, the raw pitch-by-pitch data required to manually calculate detailed plate discipline metrics—such as O-Swing%, Z-Swing%, Contact%, and others—was not available. As a result, the analysis relied on averaging the pre-calculated rate statistics provided in the Fangraphs game logs, which may obscure game-to-game variability or introduce aggregation bias.
+
+Second, the dataset was constrained by the Fangraphs ID match rate. Out of 1,956 rookie hitters who debuted between 2000 and 2022, only 34% could be successfully matched to a valid Fangraphs player ID. This reduced the effective sample size for the analysis and may introduce selection bias if the unmatched players differ in meaningful ways from those included in the final dataset.
 
 To investigate potential early-career adjustments by rookie hitters, I first examined the distribution of game-level observations using a histogram with an overlaid density curve. The resulting distribution is right-skewed, indicating that the majority of observations are concentrated in the earlier stages of player careers. Using the quantile() function, I determined that the 50th percentile corresponds to game 373. To focus the analysis on the initial adjustment period, I restricted the dataset to observations occurring at or before a player’s 373rd career game. This filtering approach helps isolate trends that are more likely to reflect early developmental changes rather than long-term performance patterns. 
 
