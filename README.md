@@ -57,10 +57,8 @@ Once again, there does not seem to be an underlying trend or a clear inflection 
 
 ![image](https://github.com/user-attachments/assets/68330584-2005-427e-b5cc-14fed29c040a)
 
-
 ![image](https://github.com/user-attachments/assets/af1de697-a1cf-4021-9461-68addc4dfa00)
 
-
-
+Each graph tells an interesting story about a hitter's swing decisions. Looking at the O-Swing% (Swings at pitches outside the zone/pitches outside the zone), the trend shows a modest increase in O-Swing% before the breakpoint, followed by a slight decrease afterward. This suggests that rookie hitters may initially become more aggressive on pitches outside the zone due to the breaking and offspeed pitches in the majors has compared to the minor league. The Z-Swing% (Swings at pitches inside the zone/pitches inside the zone) has a sharp initial increase in Z-Swing% up to game 71 is followed by a gradual decline thereafter. This suggests rookie hitters are more aggressive with most pitches in the strike zone until around the breakpoint, where it starts to stabilize possibily due to hitters being more mature and selective on what part of the strike zone to swing at. For Swing%, the swing rate is relatively flat early on, with a slight increase, and then exhibits a notable downward trend after the breakpoint. Hitters appear to swing less frequently overall as they gain more experience, consistent with a more disciplined or selective plate approach. Overall, hitters start with increasing aggressiveness (rising Z-Swing% and O-Swing%) and eventually adjust by becoming more selective.
 
 
