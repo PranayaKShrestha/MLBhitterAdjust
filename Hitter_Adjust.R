@@ -6,7 +6,7 @@ library(ggplot2)
 library(segmented)
 library(patchwork) 
 library(cluster)
-library(tidyr)  # Or library(tidyverse) to load all tidyverse packages
+library(tidyr)
 
 #Get hitter data who were rookies from 2000 to 2022 
 hitters <- data.frame(player_full_name = character(), player_id = integer())
@@ -143,8 +143,13 @@ for (i in 1:nrow(hitters_final)) {
 
 ggplot(final_dat, aes(x = gm15_groupnumber)) +
   geom_histogram(binwidth = 50, fill = "blue", alpha = 0.7) +
-  geom_density(aes(y = after_stat(count) * 50), color = "red") +
-  labs(title = "Distribution of gm15_gmnumber")
+  geom_density(aes(y = after_stat(count) * 50), color = "red", size = 1) +
+  labs(title = "Distribution of Games", x = 'Games', y = 'Count') +
+  theme_minimal() +
+  theme(plot.title = element_text(size = 15, hjust = 0.5), 
+        plot.subtitle = element_text(size = 10, hjust = 0.5), 
+        axis.title = element_text(size = 10),
+        axis.text = element_text(size = 7))
 quantile(final_dat$gm15_groupnumber, probs = c(0.5, 0.90, 0.95, 0.99))
 
 gm50percentile_dat <- final_dat %>% filter(gm15_groupnumber < 373)
@@ -195,14 +200,14 @@ breakpoint_Zone1 <- os_Zone1$psi[2]
 ggplot(analysis_dat_50gms, aes(x = gm15_groupnumber)) +
   geom_point(aes(y = `gm15_avg_Zone%`), color = 'black', alpha = 0.5,shape = 17) +
   labs(x = "Approximate Career GM", y = "Rate", 
-       title = "Zone% Trends") +
+       title = "Zone% Trend") +
   geom_line(  # Segmented regression line
     data = newdata_Zone1,
     aes(x = gm15_groupnumber, y = pred),
     color = "red",
     linewidth = 1
   ) + 
-  geom_text(aes(x= breakpoint_Zone1 + 23, y= max(`gm15_avg_Zone%`), label = 'Breakpoint: 189'),
+  geom_text(aes(x= breakpoint_Zone1 + 23, y= max(`gm15_avg_Zone%`) + 0.002, label = 'Breakpoint: 189'),
                 color = 'red', size = 4) +
   geom_vline(  # Optional: Add vertical line at breakpoint
     xintercept = breakpoint_Zone1,
@@ -220,7 +225,7 @@ ggplot(analysis_dat_50gms, aes(x = gm15_groupnumber)) +
         axis.text = element_text(size = 7))
 
 
-#K% and BB% Trends
+#K% and BB% Trend
 fit_k_50_avg <- lm(`gm15_avg_K%` ~ gm15_groupnumber, data =analysis_dat_50gms)
 fit_BB_50_avg <- lm(`gm15_avg_BB%` ~ gm15_groupnumber, data =analysis_dat_50gms)
 os_BB1 <- segmented(fit_BB_50_avg, seg.Z = ~gm15_groupnumber, npsi = 1)
@@ -243,43 +248,34 @@ newdata_K1 <- data.frame(gm15_groupnumber = seq(
 newdata_K1$pred <- predict(os_K1, newdata = newdata_K1)
 breakpoint_K1 <- os_1$psi[2]
 
+colors <- c("K%" = "red", "BB%" = "blue")
 
 ggplot(analysis_dat_50gms, aes(x = gm15_groupnumber)) +
-  geom_point(aes(y = `gm15_avg_K%`), color = 'black', alpha = 0.5,shape = 17) +
-  geom_point(aes(y = `gm15_avg_BB%`), color = 'black', alpha = 0.5,shape = 16) +
-  geom_line(  # Segmented regression line
-    data = newdata_K1,
-    aes(x = gm15_groupnumber, y = pred),
-    color = "red",
-    linewidth = 1
-  ) + geom_vline(  # Optional: Add vertical line at breakpoint
-    xintercept = breakpoint_K1,
-    linetype = "dashed",
-    color = "red"
-  ) +  
-  geom_text(aes(x= breakpoint_K1 -23, y= max(`gm15_avg_K%`), label = 'Breakpoint: 150'),
-                 color = 'red', size = 4) +
-  geom_line(  # Segmented regression line
-    data = newdata_BB1,
-    aes(x = gm15_groupnumber, y = pred),
-    color = "blue",
-    linewidth = 1
-  ) + geom_vline(  # Optional: Add vertical line at breakpoint
-    xintercept = breakpoint_BB1,
-    linetype = "dashed",
-    color = "blue"
-  ) +  geom_text(aes(x= breakpoint_BB1 + 23, y= max(`gm15_avg_BB%`)+0.01, label = 'Breakpoint: 192'),
-                 color = 'blue', size = 4) +
-  labs(x = "Approximate Career GM", y = "Rate", 
-       title = "K% vs. BB% Trends") +
+  geom_point(aes(y = `gm15_avg_K%`, color = "K%"), alpha = 0.5, shape = 17) +
+  geom_point(aes(y = `gm15_avg_BB%`, color = "BB%"), alpha = 0.5, shape = 16) +
+  
+  geom_line(data = newdata_K1, aes(x = gm15_groupnumber, y = pred, color = "K%"), linewidth = 1) +
+  geom_line(data = newdata_BB1, aes(x = gm15_groupnumber, y = pred, color = "BB%"), linewidth = 1) +
+  
+  geom_vline(xintercept = breakpoint_K1, linetype = "dashed", color = "red") +
+  geom_vline(xintercept = breakpoint_BB1, linetype = "dashed", color = "blue") +
+  
+  geom_text(aes(x = breakpoint_K1 - 25, y = max(`gm15_avg_K%`), label = "Breakpoint: 150"),
+            color = "red", size = 4, inherit.aes = FALSE) +
+  geom_text(aes(x = breakpoint_BB1 + 25, y = max(`gm15_avg_BB%`) + 0.01, label = "Breakpoint: 192"),
+            color = "blue", size = 4, inherit.aes = FALSE) +
+  
+  scale_color_manual(name = "Metric", values = colors) +
+  labs(x = "Approximate Career GM", y = "Rate", title = "K% vs. BB% Trends") +
   theme_minimal() +
   theme(plot.title = element_text(size = 15, hjust = 0.5), 
-        plot.subtitle = element_text(size = 10, hjust = 0.5), 
         axis.title = element_text(size = 10),
-        axis.text = element_text(size = 7))
+        axis.text = element_text(size = 7),
+        legend.position = "right")
 
-summary(os_BB1)
-summary(os_K1)
+
+summary(fit_BB_50_avg)
+summary(fit_k_50_avg)
 
 
 #AVG Trend
@@ -297,7 +293,7 @@ breakpoint_AVG1 <- os_AVG1$psi[2]
 ggplot(analysis_dat_50gms, aes(x = gm15_groupnumber)) +
   geom_point(aes(y = `gm15_avg_AVG%`), color = 'black', alpha = 0.5,shape = 17) +
   labs(x = "Approximate Career GM", y = "Rate", 
-       title = "AVG% Trends") +
+       title = "AVG% Trend") +
   geom_line(  # Segmented regression line
     data = newdata_AVG1,
     aes(x = gm15_groupnumber, y = pred),
@@ -320,6 +316,9 @@ ggplot(analysis_dat_50gms, aes(x = gm15_groupnumber)) +
         axis.title = element_text(size = 10),
         axis.text = element_text(size = 7))
 
+summary(fit_AVG_50_avg)
+summary(os_AVG1)
+
 
 #OBP Trend
 fit_OBP_50_avg <- lm(`gm15_avg_OBP%` ~ gm15_groupnumber, data =analysis_dat_50gms)
@@ -336,7 +335,7 @@ breakpoint_OBP1 <- os_OBP1$psi[2]
 ggplot(analysis_dat_50gms, aes(x = gm15_groupnumber)) +
   geom_point(aes(y = `gm15_avg_OBP%`), color = 'black', alpha = 0.5,shape = 17) +
   labs(x = "Approximate Career GM", y = "Rate", 
-       title = "OBP% Trends") +
+       title = "OBP% Trend") +
   geom_line(  # Segmented regression line
     data = newdata_OBP1,
     aes(x = gm15_groupnumber, y = pred),
@@ -358,6 +357,7 @@ ggplot(analysis_dat_50gms, aes(x = gm15_groupnumber)) +
         axis.title = element_text(size = 10),
         axis.text = element_text(size = 7))
 
+summary(fit_OBP_50_avg)
 
 #SLG Trend
 fit_SLG_50_avg <- lm(`gm15_avg_SLG%` ~ gm15_groupnumber, data =analysis_dat_50gms)
@@ -374,7 +374,7 @@ breakpoint_SLG1 <- os_SLG1$psi[2]
 ggplot(analysis_dat_50gms, aes(x = gm15_groupnumber)) +
   geom_point(aes(y = `gm15_avg_SLG%`), color = 'black', alpha = 0.5,shape = 16) +
   labs(x = "Approximate Career GM", y = "Rate", 
-       title = "SLG% Trends") +
+       title = "SLG% Trend") +
   geom_line(  # Segmented regression line
     data = newdata_SLG1,
     aes(x = gm15_groupnumber, y = pred),
@@ -397,7 +397,7 @@ ggplot(analysis_dat_50gms, aes(x = gm15_groupnumber)) +
         axis.title = element_text(size = 10),
         axis.text = element_text(size = 7))
 
-summary(os_SLG1)
+summary(fit_SLG_50_avg)
 
 #O-Swing Trend
 fit_O_Swing_50_avg <- lm(`gm15_avg_O-Swing%` ~ gm15_groupnumber, data =analysis_dat_50gms)
@@ -414,7 +414,7 @@ breakpoint_O_Swing1 <- os_O_Swing1$psi[2]
 ggplot(analysis_dat_50gms, aes(x = gm15_groupnumber)) +
   geom_point(aes(y = `gm15_avg_O-Swing%`), color = 'black', alpha = 0.5,shape = 17) +
   labs(x = "Approximate Career GM", y = "Rate", 
-       title = "O-Swing% Trends") +
+       title = "O-Swing% Trend") +
   geom_line(  # Segmented regression line
     data = newdata_O_Swing1,
     aes(x = gm15_groupnumber, y = pred),
@@ -455,7 +455,7 @@ breakpoint_Z_Swing1 <- os_Z_Swing1$psi[2]
 ggplot(analysis_dat_50gms, aes(x = gm15_groupnumber)) +
   geom_point(aes(y = `gm15_avg_Z-Swing%`), color = 'black', alpha = 0.5,shape = 17) +
   labs(x = "Approximate Career GM", y = "Rate", 
-       title = "Z-Swing% Trends") +
+       title = "Z-Swing% Trend") +
   geom_line(  # Segmented regression line
     data = newdata_Z_Swing1,
     aes(x = gm15_groupnumber, y = pred),
@@ -496,7 +496,7 @@ breakpoint_Swing1 <- os_Swing1$psi[2]
 ggplot(analysis_dat_50gms, aes(x = gm15_groupnumber)) +
   geom_point(aes(y = `gm15_avg_Swing%`), color = 'black', alpha = 0.5,shape = 17) +
   labs(x = "Approximate Career GM", y = "Rate", 
-       title = "Swing% Trends") +
+       title = "Swing% Trend") +
   geom_line(  # Segmented regression line
     data = newdata_Swing1,
     aes(x = gm15_groupnumber, y = pred),
@@ -536,7 +536,7 @@ breakpoint_O_Contact1 <- os_O_Contact1$psi[2]
 ggplot(analysis_dat_50gms, aes(x = gm15_groupnumber)) +
   geom_point(aes(y = `gm15_avg_O-Contact%`), color = 'black', alpha = 0.5,shape = 17) +
   labs(x = "Approximate Career GM", y = "Rate", 
-       title = "O-Contact% Trends") +
+       title = "O-Contact% Trend") +
   geom_line(  # Segmented regression line
     data = newdata_O_Contact1,
     aes(x = gm15_groupnumber, y = pred),
@@ -577,7 +577,7 @@ ggplot(analysis_dat_50gms, aes(x = gm15_groupnumber)) +
   geom_point(aes(y = `gm15_avg_Z-Contact%`), color = 'black', alpha = 0.5,shape = 17) +
   
   labs(x = "Approximate Career GM", y = "Rate", 
-       title = "Z-Contact% Trends") +
+       title = "Z-Contact% Trend") +
   geom_line(  # Segmented regression line
     data = newdata_Z_Contact1,
     aes(x = gm15_groupnumber, y = pred),
@@ -589,7 +589,7 @@ ggplot(analysis_dat_50gms, aes(x = gm15_groupnumber)) +
     linetype = "dashed",
     color = "red"
   ) + 
-  geom_text(aes(x= breakpoint_Z_Contact1 + 23, y= max(`gm15_avg_Z-Contact%`), label = 'Breakpoint: 71'),
+  geom_text(aes(x= breakpoint_Z_Contact1 + 23, y= max(`gm15_avg_Z-Contact%`), label = 'Breakpoint: 113'),
             color = 'red', size = 4) +
   scale_y_continuous(
     limits = c(0.850, 0.890),  # Custom y-axis bounds
@@ -617,9 +617,8 @@ breakpoint_Contact1 <- os_Contact1$psi[2]
 
 ggplot(analysis_dat_50gms, aes(x = gm15_groupnumber)) +
   geom_point(aes(y = `gm15_avg_Contact%`), color = 'black', alpha = 0.5,shape = 17) +
-  '' +
   labs(x = "Approximate Career GM", y = "Rate", 
-       title = "Contact% Trends") +
+       title = "Contact% Trend") +
   geom_line(  # Segmented regression line
     data = newdata_Contact1,
     aes(x = gm15_groupnumber, y = pred),
@@ -660,9 +659,8 @@ breakpoint_F_Strike1 <- os_F_Strike1$psi[2]
 
 ggplot(analysis_dat_50gms, aes(x = gm15_groupnumber)) +
   geom_point(aes(y = `gm15_avg_F-Strike%`), color = 'black', alpha = 0.3,shape = 17) +
-  '' +
   labs(x = "Approximate Career GM", y = "Rate", 
-       title = "F-Strike% Trends") +
+       title = "F-Strike% Trend") +
   geom_line(  # Segmented regression line
     data = newdata_F_Strike1,
     aes(x = gm15_groupnumber, y = pred),
@@ -701,10 +699,9 @@ breakpoint_SwStr1 <- os_SwStr1$psi[2]
 
 
 ggplot(analysis_dat_50gms, aes(x = gm15_groupnumber)) +
-  geom_point(aes(y = `gm15_avg_SwStr%`), color = 'black', alpha = 0.5,shape = 17) +
-  '' +
+  geom_point(aes(y = `gm15_avg_SwStr%`), color = 'black', alpha = 0.5,shape = 17)+
   labs(x = "Approximate Career GM", y = "Rate", 
-       title = "SwStr% Trends") +
+       title = "SwStr% Trend") +
   geom_line(  # Segmented regression line
     data = newdata_SwStr1,
     aes(x = gm15_groupnumber, y = pred),
@@ -715,7 +712,7 @@ ggplot(analysis_dat_50gms, aes(x = gm15_groupnumber)) +
     xintercept = breakpoint_SwStr1,
     linetype = "dashed",
     color = "red"
-  ) + 
+  ) +
   geom_text(aes(x= breakpoint_SwStr1 + 23, y= max(`gm15_avg_SwStr%`), label = 'Breakpoint: 128'),
             color = 'red', size = 4) +
   scale_y_continuous(
