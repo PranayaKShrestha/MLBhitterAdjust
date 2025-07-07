@@ -1,8 +1,8 @@
 # MLBhitterAdjust
 
-While watching the Toronto Blue Jays this season, I noticed Addison Barger starting to break out at the plate. It made me wonder: how long does it usually take for rookie hitters to adjust to major league pitching? Some players seem to struggle early but then suddenly turn a corner, while others never quite get there. That observation led to this project.
+While watching the Toronto Blue Jays this season, I noticed Addison Barger starting to break out at the plate. It made me wonder: How long does it usually take for rookie hitters to adjust to major league pitching? Some players seem to struggle early but then suddenly turn a corner, while others never quite get there. That observation led to this project.
 
-The goal is to explore whether we can quantify the point at which hitters begin to adjust by looking at game-by-game trends in stats like strikeout rate (K%), walk rate (BB%) and more in-depth Plate Discipline statistics such as O-Contact%, Zone%, etc. By tracking performance across a 15 games interval, I hope to find patterns in how rookies progress and whether there is a common adjustment period among successful players.
+The goal is to explore whether we can quantify the point at which hitters begin to adjust by looking at game-by-game trends in stats like strikeout rate (K%), walk rate (BB%) and more in-depth Plate Discipline statistics such as O-Contact%, Zone%, etc. By tracking performance across a 15-game interval, I hope to find patterns in how rookies progress and whether there is a common adjustment period among successful players.
 
 Research Question: When do rookie hitters begin to adjust to MLB pitching, and how can we measure that adjustment using performance data?
 
@@ -54,7 +54,7 @@ Once again, there does not seem to be an underlying trend or a clear inflection 
 
 **O-Swing%, Z-Swing% and Swing% Trends**
 
-![image](https://github.com/user-attachments/assets/79d430be-842b-4523-99ae-bd405cd71234)
+![image](https://github.com/user-attachments/assets/2aa4bd95-4ada-40a0-a6af-8cebf26eea48)
 
 ![image](https://github.com/user-attachments/assets/a8bcb81d-4198-4c81-a0ad-5df840da856d)
 
@@ -78,7 +78,7 @@ Each graph here tells a similar story. Rookie hitters have a difficult time maki
 
 ![image](https://github.com/user-attachments/assets/8e02ec9e-95a8-479a-a5bd-817549f7d8d7)
 
-![image](https://github.com/user-attachments/assets/99500c18-b74a-4725-9430-15425d7a0ea3)
+![image](https://github.com/user-attachments/assets/3f8acef1-1046-4122-849c-eebf9573f7d7)
 
 ![image](https://github.com/user-attachments/assets/bee90227-19fc-411a-bfdf-23f24c079fcd)
 
