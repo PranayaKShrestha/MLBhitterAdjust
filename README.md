@@ -43,42 +43,44 @@ The segmented() function in R estimates breakpoints in a dataset by fitting piec
 
 
 **AVG%, OBP% and SLG% Trends**
+![image](https://github.com/user-attachments/assets/164e8cd3-8b48-4676-8b90-e5e4aa34dc93)
 
-![image](https://github.com/user-attachments/assets/7b0dcaf0-571c-4051-a668-0c62b5770189)
-![image](https://github.com/user-attachments/assets/6aa4d338-e0d4-4eb6-8334-d038fbe0b38a)
-![image](https://github.com/user-attachments/assets/d84ec02e-e1db-4ab3-93d4-af29f3f3e256)
+![image](https://github.com/user-attachments/assets/94c0130b-1bce-4fc6-8b0c-0f7de2a69701)
+
+![image](https://github.com/user-attachments/assets/f63e9388-9049-48f9-bb7a-70123a660577)
 
 
-Once again, there does not seem to be an underlying trend or a clear inflection point on AVG%, OBP%, or SLG%. Each statistic exhibits a steady increase with OBP% and AVG% having a similar slope (2.924e-05 and 1.953e-05, respectively), which makes sense since OBP% and AVG% are highly correlated. SLG% has a steeper positive slope, which is interesting.
+Once again, there does not seem to be an underlying trend or a clear inflection point on AVG%, OBP%, or SLG%. Each statistic exhibits a steady increase, with OBP% and AVG% having similar slopes (2.924e-05 and 1.953e-05, respectively), which is expected since OBP% and AVG% are highly correlated. SLG% has a steeper positive slope, which is interesting.
 
 **O-Swing%, Z-Swing% and Swing% Trends**
 
-![image](https://github.com/user-attachments/assets/6c3f551f-025b-48f7-a145-8affa352af93)
+![image](https://github.com/user-attachments/assets/79d430be-842b-4523-99ae-bd405cd71234)
 
-![image](https://github.com/user-attachments/assets/68330584-2005-427e-b5cc-14fed29c040a)
+![image](https://github.com/user-attachments/assets/a8bcb81d-4198-4c81-a0ad-5df840da856d)
 
-![image](https://github.com/user-attachments/assets/af1de697-a1cf-4021-9461-68addc4dfa00)
+![image](https://github.com/user-attachments/assets/a5180e4c-b4c9-4c61-b039-aa16bf9ed51b)
+
 
 Each graph tells an interesting story about a hitter's swing decisions. Looking at the O-Swing% (Swings at pitches outside the zone/pitches outside the zone), the trend shows a modest increase in O-Swing% before the breakpoint, followed by a slight decrease afterward. This suggests that rookie hitters may initially become more aggressive on pitches outside the zone due to the breaking and offspeed pitches in the majors has compared to the minor league. The Z-Swing% (Swings at pitches inside the zone/pitches inside the zone) has a sharp initial increase in Z-Swing% up to game 71 is followed by a gradual decline thereafter. This suggests rookie hitters are more aggressive with most pitches in the strike zone until around the breakpoint, where it starts to stabilize possibily due to hitters being more mature and selective on what part of the strike zone to swing at. For Swing%, the swing rate is relatively flat early on, with a slight increase, and then exhibits a notable downward trend after the breakpoint. Hitters appear to swing less frequently overall as they gain more experience, consistent with a more disciplined or selective plate approach. Overall, hitters start with increasing aggressiveness (rising Z-Swing% and O-Swing%) and eventually adjust by becoming more selective.
 
 **O-Contact%, Z-Contact% and Contact% Trends**
 
-![image](https://github.com/user-attachments/assets/40fd87d8-99ab-400f-8d5e-7bfb3d429fb4)
+![image](https://github.com/user-attachments/assets/37a53cf5-5bbc-4e71-9690-5b23461563c2)
 
-![image](https://github.com/user-attachments/assets/7dbf70b5-6806-4c0a-b3b1-2e36d566142d)
+![image](https://github.com/user-attachments/assets/c319e8da-133f-400e-a5fa-4a1c6b94ac08)
 
-![image](https://github.com/user-attachments/assets/4a66f598-f4c7-40c1-957b-ca54f6118750)
+![image](https://github.com/user-attachments/assets/e50639d6-2192-4145-88c6-61efefcc948b)
 
 
 Each graph here tells a similar story. Rookie hitters have a difficult time making contact in general, whether it be inside or outside the zone at the beginning. However, each graph's trend shows a modest linear increase on swings outside the strike-zone (O-Contact) and inside the strike-zone (Z-Contact). Interesting to note that each one of their breakpoints is between 100-150 games, which may be a signal of when hitters finally adjust to major league pitching (i.e., the amount of vertical/horizontal break on pitches, velocity, etc.) to be able to make contact. 
 
 **Zone%, F-Strike% and SwStr% Trends**
 
-![image](https://github.com/user-attachments/assets/c2bc14d9-8973-4a67-82c9-8293592e2d4e)
+![image](https://github.com/user-attachments/assets/8e02ec9e-95a8-479a-a5bd-817549f7d8d7)
 
-![image](https://github.com/user-attachments/assets/8a9f305e-2838-4c2c-af4a-270536ec73c3)
+![image](https://github.com/user-attachments/assets/99500c18-b74a-4725-9430-15425d7a0ea3)
 
-![image](https://github.com/user-attachments/assets/d621bbaa-5c4c-4a02-a82e-2dc81796c949)
+![image](https://github.com/user-attachments/assets/bee90227-19fc-411a-bfdf-23f24c079fcd)
 
 
 These statistics likely reflect not only hitter behavior but also how pitchers approach rookie hitters. Nonetheless, they still offer valuable insight into the adjustments and decision-making patterns of hitters over time. The Zone% (Pitches in the strike zone / Total pitches) trend is relatively flat before the breakpoint, followed by a modest but consistent decline in Zone% afterward. F-Strike% (First pitch strikes / PA) and SwStr% (Swings and misses / Total pitches) also sees a steady decline; however, it is throughout the entire sample. Based on these trends, it suggests pitchers adjust their approach as hitters become more experienced (fewer pitches in the zone and fewer first-pitch strikes) while hitters reduce their swing and miss percentage as they can make more contact with pitches (as seen in the previous Contact graphs).
