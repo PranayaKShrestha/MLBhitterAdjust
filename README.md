@@ -85,3 +85,9 @@ Each graph here tells a similar story. Rookie hitters have a difficult time maki
 
 These statistics likely reflect not only hitter behavior but also how pitchers approach rookie hitters. Nonetheless, they still offer valuable insight into the adjustments and decision-making patterns of hitters over time. The Zone% (Pitches in the strike zone / Total pitches) trend is relatively flat before the breakpoint, followed by a modest but consistent decline in Zone% afterward. F-Strike% (First pitch strikes / PA) and SwStr% (Swings and misses / Total pitches) also sees a steady decline; however, it is throughout the entire sample. Based on these trends, it suggests pitchers adjust their approach as hitters become more experienced (fewer pitches in the zone and fewer first-pitch strikes) while hitters reduce their swing and miss percentage as they can make more contact with pitches (as seen in the previous Contact graphs).
 
+
+# Conclusion
+
+Looking back at the original research question, how long does it usually take for rookie hitters to adjust to major league pitching, the analysis suggests that there is no single point in time when success begins. Instead, the data shows that each hitter follows a different path, with progress occurring at varying rates. Although breakpoints were identified for each metric using segmented regression, they were scattered across the career timeline rather than clustered around a specific point. This indicates that most hitters improve gradually, and in many cases, the trends are more linear than abrupt.
+
+Overall, there isn't one moment when a rookie "figures it out." Development happens over time and looks different for every player. These findings reinforce the idea that growth at the major league level is a continuous process, not a sudden shift.
