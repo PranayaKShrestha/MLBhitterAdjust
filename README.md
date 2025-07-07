@@ -1,4 +1,4 @@
-#⚾ Rookie Hitter Adjustment Time
+# Rookie Hitter Adjustment Time ⚾
 
 While watching the Toronto Blue Jays this season, I noticed Addison Barger starting to break out at the plate. It made me wonder: How long does it usually take for rookie hitters to adjust to major league pitching? Some players seem to struggle early but then suddenly turn a corner, while others never quite get there. That observation led to this project.
 
@@ -6,7 +6,7 @@ The goal is to explore whether we can quantify the point at which hitters begin 
 
 Research Question: When do rookie hitters begin to adjust to MLB pitching, and how can we measure that adjustment using performance data?
 
-#⚾ SetUp/Methodology
+# SetUp/Methodology ⚾
 The goal of this project is to examine how long it takes for rookie hitters to adjust to major league pitching by analyzing trends in plate discipline and batted-ball metrics over time. To do this, I collected and processed game-by-game performance data for rookies who debuted between 2002 and 2022.
 
 Using the mlb_stats() function from the baseballr package, I pulled seasonal hitting stats for all MLB rookies from 2000 to 2022. For each player, I used the mlb_people() function to retrieve their MLB debut year and last active season, and filtered out pitchers and any players with incomplete or invalid records.
@@ -33,7 +33,7 @@ To investigate potential early-career adjustments by rookie hitters, I first exa
 
 Furthermore, to reduce noise and randomness, I grouped each game number and averaged each statistic for that set of game numbers.
 
-#⚾ Analysis
+# Analysis ⚾
 
 To identify when rookie hitters begin to adjust to major league pitching, I used segmented regression. This method is well-suited for detecting structural changes or breakpoints in a time series. These breakpoints provide a way to estimate when a hitter begins to "adjust" or improve in a measurable way.
 
@@ -88,7 +88,7 @@ Each graph here tells a similar story. Rookie hitters have a difficult time maki
 These statistics likely reflect not only hitter behavior but also how pitchers approach rookie hitters. Nonetheless, they still offer valuable insight into the adjustments and decision-making patterns of hitters over time. The Zone% (Pitches in the strike zone / Total pitches) trend is relatively flat before the breakpoint, followed by a modest but consistent decline in Zone% afterward. F-Strike% (First pitch strikes / PA) and SwStr% (Swings and misses / Total pitches) also sees a steady decline; however, it is throughout the entire sample. Based on these trends, it suggests pitchers adjust their approach as hitters become more experienced (fewer pitches in the zone and fewer first-pitch strikes) while hitters reduce their swing and miss percentage as they can make more contact with pitches (as seen in the previous Contact graphs).
 
 
-#⚾ Conclusion
+# Conclusion ⚾
 
 Looking back at the original research question, how long does it usually take for rookie hitters to adjust to major league pitching, the analysis suggests that there is no single point in time when success begins. Instead, the data shows that each hitter follows a different path, with progress occurring at varying rates. Although breakpoints were identified for each metric using segmented regression, they were scattered across the career timeline rather than clustered around a specific point. This indicates that most hitters improve gradually, and in many cases, the trends are more linear than abrupt.
 
